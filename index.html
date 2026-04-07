@@ -1207,7 +1207,7 @@
 /* ── Wrapper: contains everything, dark bg ── */
 #celsior-wrapper {
   position: relative;
-  background: radial-gradient(ellipse at 30% 40%, #0f0520 0%, #100220 55%, #08021a 100%);
+  background: linear-gradient(135deg, #1a0533 0%, #2d0a5e 30%, #4c1d95 60%, #3b0764 80%, #1e0442 100%);
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   /* NO overflow:hidden — breaks position:sticky and isn't needed with fixed canvas */
@@ -3886,71 +3886,314 @@ void main(){
     return pos;
   }
 
-  // ── 2-D Triangle / Chevron — matches the Pyramid Talent logo mark ────
-  // Particles distributed along the two rising edges (left-up + right-up)
-  // meeting at the apex, like the ∧ chevron in the logo.
-  function makePyramidPositions(count, scale) {
-    scale = scale || 0.42;
-    const pos = new Float32Array(count * 3);
-    // Apex at top-centre, base corners at bottom-left and bottom-right
-    // Coordinates in normalised [-1,1] space, centred at 0.
-    // After the mesh rotation.x=-π/2: X→screen-right, Z→screen-up.
-    const apex = [0,  1];   // [x, z] in buffer space
-    const bL   = [-1, -0.55];
-    const bR   = [ 1, -0.55];
+  // ══════════════════════════════════════════════════════════════════════
+  // TRUE 3-D INTERACTIVE PYRAMID — full rewrite
+  // ══════════════════════════════════════════════════════════════════════
+  const cwPyramidGroup = new THREE.Group();
+  cwPyramidGroup.visible = false;
 
-    // Distribute along the two edges with a small jitter for particle feel
-    const half = count >> 1;
-    const jitter = 0.025;
-    for (let i = 0; i < count; i++) {
-      const t = Math.random();
-      let ex, ez;
-      if (i < half) {
-        // Left edge: apex → bottomLeft
-        ex = apex[0] + (bL[0] - apex[0]) * t;
-        ez = apex[1] + (bL[1] - apex[1]) * t;
-      } else {
-        // Right edge: apex → bottomRight
-        ex = apex[0] + (bR[0] - apex[0]) * t;
-        ez = apex[1] + (bR[1] - apex[1]) * t;
-      }
-      // Add slight thickness so it's not a razor-thin line
-      const thickness = 0.018 * (1 - t * 0.4); // thicker near base, thinner at apex
-      pos[i*3]   = ex * scale + 0.5 + (Math.random() - 0.5) * thickness;
-      pos[i*3+1] = 0.5 + (Math.random() - 0.5) * jitter;   // Y = depth (flat)
-      pos[i*3+2] = ez * scale + 0.5 + (Math.random() - 0.5) * thickness;
+  // ── Mouse / touch interaction state ──
+  const cwMouse = { x: 0, y: 0, tx: 0, ty: 0 }; // target vs smoothed
+  const cwPyramidRotTarget = { x: 0.35, y: 0.0 };
+  const cwPyramidRotCurrent = { x: 0.35, y: 0.0 };
+  let cwPyramidAutoSpin = 0; // accumulated auto-rotation Y
+
+  window.addEventListener('mousemove', e => {
+    // Normalised -1..1 over the viewport
+    cwMouse.tx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    cwMouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function buildWireframePyramid() {
+    const g = cwPyramidGroup;
+    while (g.children.length) g.remove(g.children[0]);
+
+    // ── True 3-D pyramid: square base, apex above centre ──
+    const H  = 1.05;   // apex height
+    const W  = 0.95;   // half-width of base
+    const BY = -0.28;  // base Y level
+
+    const apex = new THREE.Vector3( 0,  H,  0 );
+    const bFL  = new THREE.Vector3(-W, BY, -W );
+    const bFR  = new THREE.Vector3( W, BY, -W );
+    const bBL  = new THREE.Vector3(-W, BY,  W );
+    const bBR  = new THREE.Vector3( W, BY,  W );
+
+    const verts = { apex, bFL, bFR, bBL, bBR };
+
+    // All 8 edges with depth-priority weights (front faces brighter)
+    const edges = [
+      { a: apex, b: bFL, w: 1.0 },  // front-left lateral  — most visible
+      { a: apex, b: bFR, w: 1.0 },  // front-right lateral
+      { a: apex, b: bBL, w: 0.55 }, // back-left lateral
+      { a: apex, b: bBR, w: 0.55 }, // back-right lateral
+      { a: bFL,  b: bFR, w: 0.9  }, // front base edge
+      { a: bFR,  b: bBR, w: 0.6  }, // right base edge
+      { a: bBR,  b: bBL, w: 0.45 }, // back base edge
+      { a: bBL,  b: bFL, w: 0.6  }, // left base edge
+    ];
+
+    // ── Multi-layer edge rendering: core + glow + outer shimmer ──
+    const edgeLines = [];
+    const glowLines = [];
+
+    edges.forEach(({ a, b, w }) => {
+      // Core line — white, full brightness
+      const coreGeo = new THREE.BufferGeometry().setFromPoints([a, b]);
+      const coreMat = new THREE.LineBasicMaterial({
+        color: 0xffffff, transparent: true, opacity: 0,
+        blending: THREE.AdditiveBlending, depthTest: true,
+      });
+      const coreLine = new THREE.Line(coreGeo, coreMat);
+      coreLine.userData.weight = w;
+      g.add(coreLine);
+      edgeLines.push(coreLine);
+
+      // Glow layer 1 — slightly expanded, lavender
+      const g1pts = [a.clone().multiplyScalar(1.015), b.clone().multiplyScalar(1.015)];
+      const glow1 = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(g1pts),
+        new THREE.LineBasicMaterial({ color: 0xc4b5fd, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthTest: false })
+      );
+      glow1.userData.weight = w;
+      g.add(glow1);
+      glowLines.push(glow1);
+
+      // Glow layer 2 — wider, deeper purple
+      const g2pts = [a.clone().multiplyScalar(1.04), b.clone().multiplyScalar(1.04)];
+      const glow2 = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(g2pts),
+        new THREE.LineBasicMaterial({ color: 0x7c3aed, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthTest: false })
+      );
+      glow2.userData.weight = w;
+      g.add(glow2);
+      glowLines.push(glow2);
+    });
+
+    // ── Apex point glow — a bright halo at the tip ──
+    const apexGeo = new THREE.BufferGeometry();
+    apexGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, H, 0]), 3));
+    const apexMat = new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.065, transparent: true, opacity: 0,
+      blending: THREE.AdditiveBlending, depthTest: false, sizeAttenuation: true,
+    });
+    const apexPoint = new THREE.Points(apexGeo, apexMat);
+    g.add(apexPoint);
+
+    // ── Corner points — small glowing dots at each base corner ──
+    const cornerVerts = [bFL, bFR, bBL, bBR];
+    const cornerPos = new Float32Array(cornerVerts.length * 3);
+    cornerVerts.forEach((v, i) => { cornerPos[i*3]=v.x; cornerPos[i*3+1]=v.y; cornerPos[i*3+2]=v.z; });
+    const cornerGeo = new THREE.BufferGeometry();
+    cornerGeo.setAttribute('position', new THREE.BufferAttribute(cornerPos, 3));
+    const cornerMat = new THREE.PointsMaterial({
+      color: 0xc4b5fd, size: 0.04, transparent: true, opacity: 0,
+      blending: THREE.AdditiveBlending, depthTest: false, sizeAttenuation: true,
+    });
+    const cornerPoints = new THREE.Points(cornerGeo, cornerMat);
+    g.add(cornerPoints);
+
+    // ── Particle trails along edges ──
+    const TRAIL_COUNT = 6000;
+    const trailPos    = new Float32Array(TRAIL_COUNT * 3);
+    const trailData   = new Float32Array(TRAIL_COUNT * 3); // [edgeIdx, t, phase]
+    const trailSpeeds = new Float32Array(TRAIL_COUNT);
+
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const ei = Math.floor(Math.random() * edges.length);
+      const t  = Math.random();
+      const { a, b } = edges[ei];
+      trailPos[i*3]   = a.x + (b.x-a.x)*t;
+      trailPos[i*3+1] = a.y + (b.y-a.y)*t;
+      trailPos[i*3+2] = a.z + (b.z-a.z)*t;
+      trailData[i*3]   = ei;
+      trailData[i*3+1] = t;
+      trailData[i*3+2] = Math.random() * Math.PI * 2;
+      // Speed proportional to edge weight — front edges faster = more "alive"
+      trailSpeeds[i] = (0.00025 + Math.random() * 0.00055) * edges[ei].w;
     }
-    return pos;
+
+    const trailGeo = new THREE.BufferGeometry();
+    trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPos, 3));
+    const trailAlphas = new Float32Array(TRAIL_COUNT);
+    trailGeo.setAttribute('aAlpha', new THREE.BufferAttribute(trailAlphas, 1));
+
+    const trailVS = `
+      attribute float aAlpha;
+      varying float vAlpha;
+      void main() {
+        vAlpha = aAlpha;
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        float dist = length(mvPos.xyz);
+        gl_PointSize = clamp(4.5 / dist, 1.0, 4.5);
+        gl_Position  = projectionMatrix * mvPos;
+      }
+    `;
+    const trailFS = `
+      uniform float uOpacity;
+      varying float vAlpha;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        float c = smoothstep(0.5, 0.15, d);
+        gl_FragColor = vec4(1.0, 1.0, 1.0, c * vAlpha * uOpacity);
+      }
+    `;
+    const trailMat = new THREE.ShaderMaterial({
+      vertexShader: trailVS, fragmentShader: trailFS,
+      uniforms: { uOpacity: { value: 0 } },
+      transparent: true, depthTest: false, blending: THREE.AdditiveBlending,
+    });
+    const trailPoints = new THREE.Points(trailGeo, trailMat);
+    g.add(trailPoints);
+
+    g.userData = {
+      edges, edgeLines, glowLines,
+      apexPoint, cornerPoints,
+      trailPoints, trailData, trailSpeeds, trailGeo, trailAlphas,
+      masterAlpha: 0,
+    };
   }
 
-  // ── Triple chevrons — three ∧ shapes side by side (like a cluster) ──
-  function makeTriplePyramidPositions(count) {
+  // ── Per-frame trail update ──────────────────────────────────────────
+  function cwUpdatePyramidTrails(dt) {
+    if (!cwPyramidGroup.visible) return;
+    const { trailData, trailSpeeds, edges, trailGeo, trailAlphas } = cwPyramidGroup.userData;
+    if (!trailData) return;
+    const pos = trailGeo.attributes.position.array;
+    const N   = trailSpeeds.length;
+
+    for (let i = 0; i < N; i++) {
+      trailData[i*3+1] += trailSpeeds[i];
+      trailData[i*3+2] += 0.018;
+
+      if (trailData[i*3+1] >= 1) {
+        trailData[i*3+1] = 0;
+        trailData[i*3]   = Math.floor(Math.random() * edges.length);
+      }
+      const ei = Math.floor(trailData[i*3]);
+      const t  = trailData[i*3+1];
+      const { a, b } = edges[ei];
+
+      pos[i*3]   = a.x + (b.x-a.x)*t;
+      pos[i*3+1] = a.y + (b.y-a.y)*t;
+      pos[i*3+2] = a.z + (b.z-a.z)*t;
+
+      // Smooth fade: peaks at edge centre, tapers at tips, gentle twinkle
+      const edgeFade = Math.sin(t * Math.PI);
+      const twinkle  = 0.55 + 0.45 * Math.sin(trailData[i*3+2]);
+      trailAlphas[i] = edgeFade * twinkle * edges[ei].w;
+    }
+    trailGeo.attributes.position.needsUpdate = true;
+    trailGeo.attributes.aAlpha.needsUpdate   = true;
+  }
+
+  // ── Per-frame rotation update — smooth mouse tracking ──────────────
+  function cwUpdatePyramidRotation(dt) {
+    if (!cwPyramidGroup.visible) return;
+    const lerpSpeed = 3.5 * dt;
+
+    // Idle auto-spin
+    cwPyramidAutoSpin += dt * 0.28;
+
+    // Mouse adds tilt: Y-axis from horizontal mouse, X-axis from vertical
+    cwPyramidRotTarget.y = cwPyramidAutoSpin + cwMouse.tx * 0.45;
+    cwPyramidRotTarget.x = 0.30 - cwMouse.ty * 0.22;
+
+    // Smooth lerp toward target
+    cwPyramidRotCurrent.x += (cwPyramidRotTarget.x - cwPyramidRotCurrent.x) * Math.min(lerpSpeed, 1);
+    cwPyramidRotCurrent.y += (cwPyramidRotTarget.y - cwPyramidRotCurrent.y) * Math.min(lerpSpeed, 1);
+
+    cwPyramidGroup.rotation.x = cwPyramidRotCurrent.x;
+    cwPyramidGroup.rotation.y = cwPyramidRotCurrent.y;
+  }
+
+  // ── Apply master alpha to all pyramid materials ──────────────────────
+  function cwApplyPyramidAlpha(alpha) {
+    const ud = cwPyramidGroup.userData;
+    if (!ud.edgeLines) return;
+    ud.masterAlpha = alpha;
+    cwPyramidGroup.visible = alpha > 0.001;
+
+    ud.edgeLines.forEach(l => {
+      l.material.opacity = alpha * l.userData.weight * 0.92;
+    });
+    ud.glowLines.forEach((l, i) => {
+      // Even indices = layer1 (lavender), odd = layer2 (deep purple)
+      const isLayer1 = (i % 2 === 0);
+      l.material.opacity = alpha * l.userData.weight * (isLayer1 ? 0.38 : 0.22);
+    });
+    ud.apexPoint.material.opacity   = alpha * 0.95;
+    ud.cornerPoints.material.opacity = alpha * 0.7;
+    if (ud.trailPoints.material.uniforms)
+      ud.trailPoints.material.uniforms.uOpacity.value = alpha * 0.88;
+  }
+
+  // ── GSAP-driven fade transitions ────────────────────────────────────
+  let _pyramidTween = null;
+
+  function cwShowPyramid(alpha) { cwApplyPyramidAlpha(alpha); }
+
+  function cwFadeInPyramid() {
+    if (_pyramidTween) _pyramidTween.kill();
+    cwPyramidGroup.visible = true;
+    cwPyramidAutoSpin = cwPyramidRotCurrent.y; // start from current rotation
+    const proxy = { a: cwPyramidGroup.userData.masterAlpha || 0 };
+    _pyramidTween = gsap.to(proxy, {
+      a: 1, duration: 2.2,
+      ease: 'expo.out',
+      onUpdate() { cwApplyPyramidAlpha(proxy.a); },
+    });
+  }
+
+  function cwFadeOutPyramid(onDone) {
+    if (_pyramidTween) _pyramidTween.kill();
+    const proxy = { a: cwPyramidGroup.userData.masterAlpha || 1 };
+    _pyramidTween = gsap.to(proxy, {
+      a: 0, duration: 1.1,
+      ease: 'power4.in',
+      onUpdate() { cwApplyPyramidAlpha(proxy.a); },
+      onComplete() { cwHidePyramid(); if (onDone) onDone(); },
+    });
+  }
+
+  function cwHidePyramid() {
+    cwApplyPyramidAlpha(0);
+    cwPyramidGroup.visible = false;
+  }
+
+  // ── Pyramid edge particle positions for morph buffer ──────────────
+  function makePyramidPositions(count, scale) {
+    scale = scale || 0.38;
     const pos = new Float32Array(count * 3);
-    const configs = [
-      { ox: -0.32, oz:  0.0,  s: 0.26 },   // left ∧
-      { ox:  0.0,  oz:  0.06, s: 0.34 },   // centre (taller)
-      { ox:  0.32, oz:  0.0,  s: 0.26 },   // right ∧
+    const H = 1.05, W = 0.95, BY = -0.28;
+    const apex = [0, H, 0];
+    const corners = [[-W,BY,-W],[W,BY,-W],[-W,BY,W],[W,BY,W]];
+    const edges = [
+      [apex,corners[0]],[apex,corners[1]],[apex,corners[2]],[apex,corners[3]],
+      [corners[0],corners[1]],[corners[1],corners[3]],[corners[3],corners[2]],[corners[2],corners[0]],
     ];
-    const perPyramid = Math.floor(count / configs.length);
+    const weights = [3,3,1.5,1.5,2.5,1.5,1.5,1.5];
+    const totalW = weights.reduce((a,b)=>a+b,0);
     let written = 0;
-    for (const cfg of configs) {
-      const sub = makePyramidPositions(perPyramid, cfg.s);
-      for (let i = 0; i < perPyramid; i++) {
-        pos[written*3]   = sub[i*3]   + cfg.ox;
-        pos[written*3+1] = sub[i*3+1];
-        pos[written*3+2] = sub[i*3+2] + cfg.oz;
-        written++;
+    for (let e = 0; e < edges.length; e++) {
+      const n = Math.round(count * weights[e] / totalW);
+      const [A, B] = edges[e];
+      for (let k = 0; k < n && written < count; k++, written++) {
+        const t = Math.random();
+        pos[written*3]   = (A[0]+(B[0]-A[0])*t)*scale + 0.5;
+        pos[written*3+1] = (A[1]+(B[1]-A[1])*t)*scale + 0.5;
+        pos[written*3+2] = (A[2]+(B[2]-A[2])*t)*scale + 0.5;
       }
     }
     for (let i = written; i < count; i++) {
-      pos[i*3]   = pos[(i % written)*3];
-      pos[i*3+1] = pos[(i % written)*3+1];
-      pos[i*3+2] = pos[(i % written)*3+2];
+      pos[i*3]=pos[(i%written)*3]; pos[i*3+1]=pos[(i%written)*3+1]; pos[i*3+2]=pos[(i%written)*3+2];
     }
     return pos;
   }
 
-  // ── Celsior SVG logo → particle positions ──────────────────────────
+  function makeTriplePyramidPositions(count) {
+    return makePyramidPositions(count, 0.38); // same shape, wireframe handles visual
+  }
   // Key insight: shader does pos*2-1, mesh has rotation.x=-π/2 (Y↔Z swap).
   // So in buffer: X=screen-right, Y=depth(ignored visually), Z=screen-up.
   // We render into a SQUARE canvas so X and Z both span [0,1] symmetrically.
@@ -4053,10 +4296,10 @@ void main(){
       { position: new THREE.Vector3(0, 0, 2.5),     rotation: new THREE.Euler(0, 0, 0),            scale: 1   },  // 0: sphere
       { position: new THREE.Vector3(0, -0.3, 1),    rotation: new THREE.Euler(1.57, 0, 0),         scale: 1   },  // 1: disk
       { position: new THREE.Vector3(8, -1.2, -8.3), rotation: new THREE.Euler(0.16, -0.91, -0.16), scale: 7   },  // 2: cloud
-      { position: new THREE.Vector3(0, 0, -0.7),    rotation: new THREE.Euler(0, 0, 0),            scale: 5.3 },  // 3: BIG SPHERE
-      { position: new THREE.Vector3(0, 0, -0.4),    rotation: new THREE.Euler(0, 0, 0),            scale: 4.2 },  // 4: single PYRAMID ∧
-      { position: new THREE.Vector3(0, 0, -0.5),    rotation: new THREE.Euler(0, 0, 0),            scale: 3.6 },  // 5: triple PYRAMIDS ∧∧∧
-      { position: new THREE.Vector3(0.1, 0, 0),     rotation: new THREE.Euler(0, 0, 0),            scale: 3.4 },  // 6: LOGO centred
+      { position: new THREE.Vector3(0.6, 0, -0.7),  rotation: new THREE.Euler(0, 0, 0),            scale: 5.3 },  // 3: BIG SPHERE (shifted right)
+      { position: new THREE.Vector3(0.8, 0.2, -0.3),rotation: new THREE.Euler(0.3, 0, 0),          scale: 4.0 },  // 4: single PYRAMID
+      { position: new THREE.Vector3(0.8, 0.2, -0.4),rotation: new THREE.Euler(0.3, 0, 0),          scale: 3.6 },  // 5: triple PYRAMIDS
+      { position: new THREE.Vector3(0.9, 0, 0),     rotation: new THREE.Euler(0, 0, 0),            scale: 3.4 },  // 6: LOGO centred-right
       { position: new THREE.Vector3(1.4, 0.0, 0.0), rotation: new THREE.Euler(0, 0, 0),            scale: 2.6 },  // 7: LOGO shifted right
     ]
   };
@@ -4065,7 +4308,7 @@ void main(){
     shaderDefaults: {
       uSize: 3, uSpread: [0,0], uNoiseFrequency: 8,
       uNoiseStrength: 0.25, uDelay: 0.3,
-      uBaseColor: new THREE.Color('#e9d5ff'), uAlpha: 0
+      uBaseColor: new THREE.Color('#ffffff'), uAlpha: 0
     },
     steps: [
       { position: new THREE.Vector3(1.8, 0.25, 0.1),  rotation: new THREE.Euler(0, 0, 0.6),    scale: 5 },
@@ -4077,7 +4320,7 @@ void main(){
   // ═══════════════════════════════════════════
   const cwCanvas   = document.getElementById('cw-webgl');
   const cwRenderer = new THREE.WebGLRenderer({ canvas: cwCanvas, antialias: false, alpha: false });
-  cwRenderer.setClearColor(0x100220);
+  cwRenderer.setClearColor(0x1a0533);
   cwRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const cwScene  = new THREE.Scene();
   const cwCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
@@ -4124,11 +4367,14 @@ void main(){
 
    const cwParticleA = cwCreateParticleSystem(cwParticleAConfig, 0, 1);
   cwScene.add(cwParticleA.points);
-  // cwParticleB: lime-green sphere — shape[3] is the tight sphere, same geometry as white sphere
-  // cwParticleB: large green sphere, shape[3]=sphere, pos/scale driven by particleBConfig steps in scroll loop
+  // cwParticleB: purple accent sphere
   const cwParticleB = cwCreateParticleSystem(cwParticleBConfig, 3, 3);
-  cwParticleB.points.visible = false;   // hidden until step 3
+  cwParticleB.points.visible = false;
   cwScene.add(cwParticleB.points);
+
+  // ── 3D Wireframe Pyramid ──
+  cwScene.add(cwPyramidGroup);
+  buildWireframePyramid();
 
   // ─── Wireframe layers permanently removed ───
   const cwBoxMat    = { opacity: 0 }; // inert dummy — kept so references don't throw
@@ -4270,6 +4516,23 @@ void main(){
         // Step i=6 = logo shift only — uProgress=0 so no re-dispersion
         cwParticleA.uniforms.uProgress.value = (i === 6) ? 0 : p;
 
+        // ── Particle alpha: fade OUT during pyramid steps, back IN for logo ──
+        if (i === 1) {
+          // Disk → cloud: start fading particles slightly, pyramid begins appearing
+          cwParticleA.uniforms.uAlpha.value = 1;
+        } else if (i === 2) {
+          // Cloud → sphere: fade particles out in second half as pyramid fades in
+          cwParticleA.uniforms.uAlpha.value = Math.max(0, 1 - Math.max(0, (p - 0.4) / 0.6));
+        } else if (i === 3 || i === 4) {
+          // Full pyramid moment — particles completely hidden
+          cwParticleA.uniforms.uAlpha.value = 0;
+        } else if (i === 5) {
+          // Pyramid → logo: particles fade back in as logo forms
+          cwParticleA.uniforms.uAlpha.value = Math.min(1, p * 1.8);
+        } else {
+          cwParticleA.uniforms.uAlpha.value = 1;
+        }
+
         cwParticleA.points.position.lerpVectors(cwParticleA.state.startPosition, cwParticleA.state.endPosition, p);
         cwParticleA.points.scale.setScalar(cwParticleA.state.startScale + (cwParticleA.state.endScale - cwParticleA.state.startScale) * p);
         cwParticleA.points.rotation.x = cwParticleA.state.startRotation.x + (cwParticleA.state.endRotation.x - cwParticleA.state.startRotation.x) * p - Math.PI / 2;
@@ -4286,19 +4549,36 @@ void main(){
           const be = cwParticleBConfig.steps[1];
           cwParticleB.points.position.lerpVectors(bs.position, be.position, p);
           cwParticleB.points.scale.setScalar(bs.scale + (be.scale - bs.scale) * p);
+          // Pyramid fades in from the START of step 2 via GSAP (fires once)
+          if (p > 0.05 && !cwPyramidGroup.visible) cwFadeInPyramid();
+          cwPyramidGroup.position.set(0.8, 0, 0);
+          cwPyramidGroup.scale.setScalar(0.7 + p * 0.3);
+          cwPyramidGroup.rotation.y = -0.3 + p * 0.5;
         } else if (i === 3) {
-          cwParticleB.points.visible = true;
-          cwParticleB.uniforms.uAlpha.value    = Math.max(0, 1 - p / 0.35);
-          cwParticleB.uniforms.uProgress.value = p;
-          const bs = cwParticleBConfig.steps[0];
-          const be = cwParticleBConfig.steps[1];
-          cwParticleB.points.position.lerpVectors(bs.position, be.position, p);
-          cwParticleB.points.scale.setScalar(bs.scale + (be.scale - bs.scale) * p);
-          if (p > 0.4) cwParticleB.points.visible = false;
+          cwParticleB.uniforms.uAlpha.value = Math.max(0, 1 - p / 0.2);
+          if (cwParticleB.uniforms.uAlpha.value <= 0) cwParticleB.points.visible = false;
+          cwPyramidGroup.position.set(0.8, 0, 0);
+          cwShowPyramid(1.0);
+          cwPyramidGroup.scale.setScalar(1.0);
+          cwPyramidGroup.rotation.y += 0.003;
+        } else if (i === 4) {
+          cwParticleB.points.visible = false;
+          cwPyramidGroup.position.set(0.8, 0, 0);
+          cwShowPyramid(1.0);
+          cwPyramidGroup.rotation.y += 0.004;
+          cwPyramidGroup.scale.setScalar(1.0 + p * 0.12);
+        } else if (i === 5) {
+          // Fade out via GSAP on first entry, then hold hidden
+          if (p < 0.05 && cwPyramidGroup.visible) cwFadeOutPyramid();
+          cwPyramidGroup.rotation.y += 0.001;
+        } else {
+          cwHidePyramid();
         }
 
         const overall = (i + p) / CW_TRANSITION_COUNT;
-        cwCameraOffset.x = -0.3 * overall;
+        // During pyramid steps (i=2..5) push camera slightly left so right side is clear
+        const pyramidBias = (i >= 2 && i <= 5) ? -0.25 : 0;
+        cwCameraOffset.x = -0.3 * overall + pyramidBias;
         cwCameraOffset.y = -0.2 * overall;
 
         document.getElementById('cwProgressFill').style.transform = `scaleX(${overall})`;
@@ -4361,6 +4641,10 @@ void main(){
     cwParticleA.uniforms.uIdleTime.value = cwIdleTime;
     cwParticleB.uniforms.uTime.value     = time * 0.001;
     cwParticleB.uniforms.uIdleTime.value = cwIdleTime;
+    // Animate particle trails along pyramid edges
+    cwUpdatePyramidTrails(dt);
+    // Smooth 3D interactive rotation
+    cwUpdatePyramidRotation(dt);
     cwCamera.position.x += (cwCameraOffset.x - cwCamera.position.x) * 0.05;
     cwCamera.position.y += (cwCameraOffset.y - cwCamera.position.y) * 0.05;
     cwCamera.lookAt(0, 0, 0);
@@ -4457,8 +4741,8 @@ void main(){
 
     // Background radial glow (green tint, depth-aware)
     const grd = ctx.createRadialGradient(W*0.42, H*0.5, 0, W*0.42, H*0.5, W*0.8);
-    grd.addColorStop(0,   'rgba(124,58,237,0.18)');
-    grd.addColorStop(0.45,'rgba(26,5,51,0.12)');
+    grd.addColorStop(0,   'rgba(200,150,255,0.12)');
+    grd.addColorStop(0.45,'rgba(80,20,120,0.08)');
     grd.addColorStop(1,   'rgba(0,0,0,0)');
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, W, H);
