@@ -980,7 +980,7 @@
       inset: 0 0 auto 0;
       height: 240px;
       z-index: 2;
-      background: linear-gradient(to bottom, rgba(30, 0, 80, 0.48) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.42) 0%, transparent 100%);
       pointer-events: none;
     }
 
@@ -989,7 +989,7 @@
       inset: auto 0 0 0;
       height: 82%;
       z-index: 2;
-      background: linear-gradient(to top, rgba(30, 0, 80, 0.78) 0%, rgba(60, 10, 120, 0.42) 28%, rgba(80, 20, 140, 0.12) 58%, transparent 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.42) 28%, rgba(0, 0, 0, 0.12) 58%, transparent 100%);
       pointer-events: none;
     }
 
@@ -1392,11 +1392,6 @@
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></span></li>
-      <li class="nav-item" data-menu="deliver"><span class="nav-link">Engagement Models <svg class="chevron"
-            viewBox="0 0 12 12" fill="none">
-            <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg></span></li>
       <li class="nav-item" data-menu="ai"><span class="nav-link">AI & Technology <svg class="chevron"
             viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -1485,23 +1480,6 @@
             <div class="drawer-sub-group">
               <div class="drawer-sub-head">Workforce Intelligence</div><a href="#">Workforce Market Insights</a><a
                 href="#">PayPrism® Rate Analytics</a><a href="#">AI Agents & Automation</a>
-            </div>
-          </div>
-        </div>
-        <div class="drawer-item">
-          <div class="drawer-link" data-drawer-toggle="d-deliver">Engagement Models<svg class="drawer-chevron"
-              viewBox="0 0 16 16" fill="none">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg></div>
-          <div class="drawer-sub" id="d-deliver">
-            <div class="drawer-sub-group">
-              <div class="drawer-sub-head">Staffing</div><a href="#">Contract & Contract-to-Hire</a><a href="#">Direct
-                Hire</a><a href="#">Teams as a Service</a>
-            </div>
-            <div class="drawer-sub-group">
-              <div class="drawer-sub-head">Enterprise Programs</div><a href="#">Employer of Record</a><a
-                href="#">Managed Workforce Programs</a><a href="#">MSP & VMS Integration</a>
             </div>
           </div>
         </div>
@@ -1716,59 +1694,6 @@
       </div>
     </div>
 
-    <div class="mega-panel" id="menu-deliver">
-      <div class="mega-inner">
-        <div class="mega-col">
-          <div class="mega-label">Engagement Models</div>
-          <div class="mega-col-head">Staffing</div>
-          <div class="mega-group">
-            <ul class="mega-links">
-              <li><a href="#">Contract & Contract-to-Hire</a></li>
-              <li><a href="#">Direct Hire</a></li>
-              <li><a href="#">Teams as a Service</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="mega-col">
-          <div class="mega-col-head" style="margin-top:26px">Enterprise Programs</div>
-          <div class="mega-group">
-            <div class="mega-group-title">Managed Workforce</div>
-            <ul class="mega-links">
-              <li><a href="#">Employer of Record (EOR)</a></li>
-              <li><a href="#">Managed Workforce Programs</a></li>
-              <li><a href="#">MSP Integration</a></li>
-              <li><a href="#">VMS Platform Support</a></li>
-            </ul>
-          </div>
-          <div class="mega-group">
-            <div class="mega-group-title">Global Delivery</div>
-            <ul class="mega-links">
-              <li><a href="#">Five Continents Coverage</a></li>
-              <li><a href="#">25+ Country Networks</a></li>
-              <li><a href="#">Best-Shoring Model</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="mega-col">
-          <div class="mega-col-head" style="margin-top:26px">MSP & VMS Partners</div>
-          <div class="mega-group">
-            <ul class="mega-links">
-              <li><a href="#">Allegis & Beeline</a></li>
-              <li><a href="#">Pontoon & Guidant Global</a></li>
-              <li><a href="#">SAP Fieldglass</a></li>
-              <li><a href="#">Coupa</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="mega-featured">
-          <div class="feat-tag">Compare Models</div>
-          <div class="feat-card">
-            <div class="feat-card-title">GCC vs. BOT vs. Teams-as-a-Service</div>
-            <div class="feat-card-desc">Find the right operating model for your scale and goals.</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="mega-panel" id="menu-ai">
       <div class="mega-inner">
@@ -2230,7 +2155,7 @@
       text-align: center;
       padding: 0 24px;
       line-height: 1.35;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     }
 
     /* ══════════════════════════════
@@ -2241,18 +2166,15 @@
    ALL PALETTES · GENSPARK GREEN
    base: deep forest #100220
 ══════════════════════════════ */
+    /* ── PURPLE palettes (pal-1, pal-3, pal-5) ── */
     .sc-pal-1,
-    .sc-pal-2,
     .sc-pal-3,
-    .sc-pal-4,
     .sc-pal-5 {
       background: #100220 !important;
     }
 
     .sc-pal-1::before,
-    .sc-pal-2::before,
     .sc-pal-3::before,
-    .sc-pal-4::before,
     .sc-pal-5::before {
       content: '';
       position: absolute;
@@ -2271,9 +2193,7 @@
     }
 
     .sc-pal-1::after,
-    .sc-pal-2::after,
     .sc-pal-3::after,
-    .sc-pal-4::after,
     .sc-pal-5::after {
       content: '';
       position: absolute;
@@ -2290,9 +2210,7 @@
     }
 
     .sc-pal-1 .sc-card-frost,
-    .sc-pal-2 .sc-card-frost,
     .sc-pal-3 .sc-card-frost,
-    .sc-pal-4 .sc-card-frost,
     .sc-pal-5 .sc-card-frost {
       background:
         radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
@@ -2302,19 +2220,86 @@
     }
 
     .sc-pal-1 .sc-card-frost::before,
-    .sc-pal-2 .sc-card-frost::before,
     .sc-pal-3 .sc-card-frost::before,
-    .sc-pal-4 .sc-card-frost::before,
     .sc-pal-5 .sc-card-frost::before {
       border-color: rgba(168, 85, 247, 0.40);
     }
 
     .sc-pal-1 .sc-card-frost::after,
-    .sc-pal-2 .sc-card-frost::after,
     .sc-pal-3 .sc-card-frost::after,
-    .sc-pal-4 .sc-card-frost::after,
     .sc-pal-5 .sc-card-frost::after {
       border-color: rgba(124, 58, 237, 0.28);
+    }
+
+    /* ── GOLDEN MUSTARD palettes (pal-2, pal-4) ── */
+    .sc-pal-2,
+    .sc-pal-4 {
+      background: #1a1100 !important;
+    }
+
+    .sc-pal-2::before,
+    .sc-pal-4::before {
+      content: '';
+      position: absolute;
+      inset: -60%;
+      background: conic-gradient(from 0deg at 40% 52%,
+          transparent 0deg,
+          rgba(212, 160, 23, 0.72) 40deg,
+          rgba(243, 186, 47, 0.54) 90deg,
+          transparent 150deg,
+          rgba(161, 110, 10, 0.50) 235deg,
+          rgba(230, 175, 55, 0.24) 295deg,
+          transparent 360deg);
+      filter: blur(22px);
+      z-index: 0;
+      animation: gsGoldFwd 14s linear infinite;
+    }
+
+    .sc-pal-2::after,
+    .sc-pal-4::after {
+      content: '';
+      position: absolute;
+      inset: -60%;
+      background: conic-gradient(from 185deg at 62% 46%,
+          transparent 0deg,
+          rgba(243, 186, 47, 0.32) 58deg,
+          transparent 125deg,
+          rgba(212, 160, 23, 0.22) 215deg,
+          transparent 360deg);
+      filter: blur(32px);
+      z-index: 1;
+      animation: gsGoldRev 22s linear infinite;
+    }
+
+    .sc-pal-2 .sc-card-frost,
+    .sc-pal-4 .sc-card-frost {
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(ellipse at 70% 15%, rgba(243, 186, 47, 0.44) 0%, transparent 46%),
+        radial-gradient(ellipse at 20% 82%, rgba(212, 160, 23, 0.30) 0%, transparent 44%);
+      background-size: 22px 22px, 100% 100%, 100% 100%;
+    }
+
+    .sc-pal-2 .sc-card-frost::before,
+    .sc-pal-4 .sc-card-frost::before {
+      border-color: rgba(243, 186, 47, 0.42);
+    }
+
+    .sc-pal-2 .sc-card-frost::after,
+    .sc-pal-4 .sc-card-frost::after {
+      border-color: rgba(212, 160, 23, 0.30);
+    }
+
+    @keyframes gsGoldFwd {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes gsGoldRev {
+      to {
+        transform: rotate(-360deg);
+      }
     }
 
     @keyframes gsGreenFwd {
@@ -2506,6 +2491,10 @@
       border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
 
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
     .spec-header {
       width: 100%;
       display: flex;
@@ -2644,25 +2633,7 @@
   <!-- ══════════════════════════════════════════════════════════
      PRIORITY STATIC BLOCK — Where We Focus
 ══════════════════════════════════════════════════════════ -->
-  <section class="priority-static" id="priorityStatic">
-    <div class="showcase-tagline" style="margin-top:0;margin-bottom:28px;">
-      <p>The best teams are built on purpose and powered by precision.</p>
-    </div>
-    <div class="priority-static-inner">
-      <span class="priority-static-desc">
-        Traditional staffing treats every hire the same way. We don't. Our approach starts with understanding what
-        skills drive your outcomes, then matches you with talent who can deliver from day one — combining three decades
-        of industry expertise with AI-powered workforce intelligence.
-      </span>
-      <a href="#contact" class="priority-static-cta">
-        Find Talent Now
-        <svg viewBox="0 0 14 14" fill="none">
-          <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
-    </div>
-  </section>
+
 
   <style>
     .priority-static {
@@ -2741,8 +2712,10 @@
      ECOSYSTEM STATIC BLOCK — One Partner Ecosystem
 ══════════════════════════════════════════════════════════ -->
   <section class="priority-static ecosystem-static" id="ecosystemStatic">
-    <div class="showcase-tagline" style="margin-top:0;margin-bottom:28px;">
-      <p>From Millions of Talent Signals to your Enterprise Performance Value — Powered by One Partner Ecosystem</p>
+    <div class="showcase-tagline" style="margin-top:0;margin-bottom:36px;">
+      <p class="eco-head">From Millions of Talent Signals to your <span class="eco-grad">Enterprise Performance
+          Value</span></p>
+      <p class="eco-sub">Powered by One Partner Ecosystem</p>
     </div>
     <div class="priority-static-inner">
       <span class="priority-static-desc">
@@ -2757,15 +2730,48 @@
 
   <style>
     .ecosystem-static {
-      padding-top: 80px;
-      border-top: 1px solid rgba(13, 17, 39, 0.07);
+      padding-top: 0;
     }
 
-    .ecosystem-static .showcase-tagline p {
-      max-width: 820px;
+    .eco-head {
+      display: block !important;
+      margin-bottom: 8px;
+      color: #000 !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+    }
+
+    .eco-grad {
+      background: linear-gradient(135deg, #100220 0%, #7c3aed 55%, #a855f7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .eco-sub {
+      font-size: clamp(1rem, 1.6vw, 1.25rem) !important;
+      font-weight: 500 !important;
+      color: #4b4b63 !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      display: block !important;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .ecosystem-static .showcase-tagline p.eco-head {
+      max-width: 920px;
       margin: 0 auto;
       display: block;
       padding: 0 32px;
+    }
+
+    #ecosystemStatic .priority-static-inner {
+      max-width: 860px;
+      padding: 0 20px;
     }
   </style>
 
@@ -2776,10 +2782,55 @@
     /* ── Wrapper: contains everything, dark bg ── */
     #celsior-wrapper {
       position: relative;
-      background: #3b1fa8;
+      background: #100220;
       color: #fff;
       font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       /* NO overflow:hidden — breaks position:sticky and isn't needed with fixed canvas */
+    }
+
+    /* Locked Background Layer matching em-section / cards */
+    .cw-bg-locked {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .cw-bg-locked::before {
+      content: '';
+      position: absolute;
+      inset: -60%;
+      z-index: 0;
+      background: conic-gradient(from 0deg at 40% 52%,
+          transparent 0deg,
+          rgba(124, 58, 237, 0.70) 40deg,
+          rgba(168, 85, 247, 0.52) 90deg,
+          transparent 150deg,
+          rgba(76, 29, 149, 0.48) 235deg,
+          rgba(139, 92, 246, 0.22) 295deg,
+          transparent 360deg);
+      filter: blur(22px);
+      animation: gsGreenFwd 14s linear infinite;
+    }
+
+    .cw-bg-locked::after {
+      content: '';
+      position: absolute;
+      inset: -60%;
+      z-index: 1;
+      background: conic-gradient(from 185deg at 62% 46%,
+          transparent 0deg,
+          rgba(168, 85, 247, 0.30) 58deg,
+          transparent 125deg,
+          rgba(124, 58, 237, 0.20) 215deg,
+          transparent 360deg);
+      filter: blur(32px);
+      animation: gsGreenRev 22s linear infinite;
     }
 
     /* ── Fixed canvas: covers viewport; clip-path set by JS to wrapper bounds ── */
@@ -2836,7 +2887,7 @@
       font-size: 10.5px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.35);
+      color: #fff;
     }
 
     /* ── Section 2: LAYERS ── */
@@ -2853,7 +2904,7 @@
       font-size: 10.5px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.38);
+      color: #fff;
       margin-bottom: 22px;
     }
 
@@ -2873,7 +2924,7 @@
     #celsior-wrapper .body-text {
       font-size: 13.5px;
       line-height: 1.8;
-      color: rgba(255, 255, 255, 0.58);
+      color: #fff;
       margin-bottom: 14px;
     }
 
@@ -2889,7 +2940,7 @@
       align-items: center;
       gap: 16px;
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.65);
+      color: #fff;
     }
 
     #celsior-wrapper .leg-line {
@@ -2910,7 +2961,7 @@
       width: 72px;
       height: 0;
       flex-shrink: 0;
-      border-bottom: 2px dotted rgba(255, 255, 255, 0.35);
+      border-bottom: 2px dotted #fff;
     }
 
     /* ── Section 3: ALD ── */
@@ -2924,7 +2975,7 @@
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1.06;
-      color: rgba(255, 255, 255, 0.9);
+      color: #fff;
       max-width: 900px;
     }
 
@@ -2963,7 +3014,7 @@
       border-radius: 100px;
       padding: 6px 16px;
       font-size: 12.5px;
-      color: rgba(255, 255, 255, 0.8);
+      color: #fff;
     }
 
     #celsior-wrapper .pill-dot {
@@ -2983,7 +3034,7 @@
     #celsior-wrapper .tg-body {
       font-size: 13.5px;
       line-height: 1.8;
-      color: rgba(255, 255, 255, 0.55);
+      color: #fff;
       margin-bottom: 40px;
     }
 
@@ -3005,7 +3056,7 @@
 
     #celsior-wrapper .stat-label {
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.42);
+      color: #fff;
       line-height: 1.5;
     }
 
@@ -3044,7 +3095,7 @@
       font-size: clamp(18px, 2vw, 26px);
       font-weight: 600;
       letter-spacing: -0.018em;
-      color: rgba(255, 255, 255, 0.75);
+      color: #fff;
       transition: color 0.25s ease;
     }
 
@@ -3159,7 +3210,7 @@
       font-size: 10.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
+      color: #fff;
     }
 
     #celsior-wrapper .cw-progress-bar {
@@ -3183,7 +3234,7 @@
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.28);
+      color: #fff;
       transition: opacity 0.4s;
     }
 
@@ -3376,6 +3427,9 @@
      PARTICLE / DIGITAL TRANSFORMATION SECTION – HTML
 ══════════════════════════════════════════════════════════ -->
   <div id="celsior-wrapper">
+
+    <!-- Locked Background (synced via JS clip-path) -->
+    <div id="cw-bg-locked" class="cw-bg-locked"></div>
 
     <!-- Sticky WebGL canvas (scoped to wrapper) -->
     <canvas id="cw-webgl"></canvas>
@@ -4089,7 +4143,7 @@
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
               <img
-                src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dden4hawr/image/upload/v1776345082/6._WorforceQuality_oqhp16.jpg?auto=compress&cs=tinysrgb&w=800"
                 alt="Job Descriptions" class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Talent Acquisition</span>
@@ -4130,7 +4184,7 @@
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
               <img
-                src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dden4hawr/image/upload/v1776343398/wetransfer_pictures-for-pyramid-cards_2026-04-16_1138/2._Performance_Prediction_sjz2ip.jpg?auto=compress&cs=tinysrgb&w=800"
                 alt="Resume is Dead" class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Performance Prediction</span>
@@ -4172,7 +4226,7 @@
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
               <img
-                src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dden4hawr/image/upload/v1776343373/wetransfer_pictures-for-pyramid-cards_2026-04-16_1138/4._Process_Design_uohlly.jpg?auto=compress&cs=tinysrgb&w=800"
                 alt="Sourcing Problem" class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Talent Strategy</span>
@@ -4215,7 +4269,7 @@
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
               <img
-                src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dden4hawr/image/upload/v1776343358/wetransfer_pictures-for-pyramid-cards_2026-04-16_1138/3._talent_stratergy_feoiwc.jpg?auto=compress&cs=tinysrgb&w=800"
                 alt="Fast vs Good Hiring" class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Process Design</span>
@@ -4257,7 +4311,7 @@
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
               <img
-                src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dden4hawr/image/upload/v1776343390/wetransfer_pictures-for-pyramid-cards_2026-04-16_1138/1._Talent_Acqusition_v4volg.jpg?auto=compress&cs=tinysrgb&w=800"
                 alt="Good Enough Contractors" class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Workforce Quality</span>
@@ -5114,613 +5168,8 @@
     })();
   </script>
 
-  <!-- ══════════════════════════════════════════════════════════
-     ENGAGEMENT MODELS SECTION
-══════════════════════════════════════════════════════════ -->
-  <section class="em-section" id="emSection">
 
-    <!-- LEFT: Sticky panel -->
-    <div class="em-left">
-      <canvas id="emParticleCanvas"></canvas>
-      <div class="em-left-inner">
-        <span class="em-pill">How We Deliver</span>
-        <h2 class="em-heading">Engagement Models Built Around Your Needs</h2>
-        <p class="em-desc">We offer flexible ways to work together — from filling a single position to managing your
-          entire contingent workforce. Choose the model that fits your situation.</p>
-        <a href="#contact" class="em-cta">Start the Conversation <svg viewBox="0 0 16 16" fill="none">
-            <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-            <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg></a>
-      </div>
-    </div>
 
-    <!-- RIGHT: Scrollable cards -->
-    <div class="em-right">
-
-      <!-- Card 01: Contract & Contract-to-Hire -->
-      <div class="em-card" data-index="01">
-        <div class="em-bracket em-bracket--tl"></div>
-        <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
-            <g style="transform-origin:45px 45px; animation: emGlobeRotate 12s linear infinite;">
-              <ellipse cx="45" cy="45" rx="30" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-              <ellipse cx="45" cy="45" rx="18" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.65" />
-              <ellipse cx="45" cy="45" rx="6" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.85" />
-              <ellipse cx="45" cy="45" rx="30" ry="10" stroke="currentColor" stroke-width="1.2" opacity="0.6" />
-              <ellipse cx="45" cy="45" rx="30" ry="20" stroke="currentColor" stroke-width="1.2" opacity="0.5" />
-              <line x1="15" y1="45" x2="75" y2="45" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-              <line x1="45" y1="15" x2="45" y2="75" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">01</span>
-        <h3 class="em-card-title">Contract &amp; Contract-to-Hire</h3>
-        <p class="em-card-desc">Bring in skilled professionals for specific initiatives. If they're a fit, convert to
-          permanent without starting over. 85% of our contract offers convert to hires.</p>
-      </div>
-
-      <!-- Card 02: Direct Hire -->
-      <div class="em-card" data-index="02">
-        <div class="em-bracket em-bracket--tl"></div>
-        <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" id="emIconBars" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="em-bars-group">
-              <rect class="em-bar" x="10" y="25" width="6" height="40" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="20" y="35" width="6" height="30" rx="1" fill="currentColor" opacity="0.8" />
-              <rect class="em-bar" x="30" y="18" width="6" height="47" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="40" y="30" width="6" height="35" rx="1" fill="currentColor" opacity="0.7" />
-              <rect class="em-bar" x="50" y="22" width="6" height="43" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="60" y="32" width="6" height="28" rx="1" fill="currentColor" opacity="0.8" />
-              <rect class="em-bar" x="70" y="20" width="6" height="45" rx="1" fill="currentColor" opacity="0.75" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">02</span>
-        <h3 class="em-card-title">Direct Hire</h3>
-        <p class="em-card-desc">We source, screen, and present candidates for your open positions. You interview and
-          hire directly onto your team. We guarantee the fit for critical permanent roles.</p>
-      </div>
-
-      <!-- Card 03: Teams as a Service -->
-      <div class="em-card" data-index="03">
-        <div class="em-bracket em-bracket--tl"></div>
-        <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="em-chevron-group">
-              <path d="M28 25 L14 45 L28 65" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.9" />
-              <path d="M42 25 L28 45 L42 65" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.6" />
-              <path d="M52 35 L62 45 L52 55" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.9" />
-              <path d="M64 30 L76 45 L64 60" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.55" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">03</span>
-        <h3 class="em-card-title">Teams as a Service</h3>
-        <p class="em-card-desc">We assemble and manage complete teams with the skills you need. You define the outcomes
-          — we handle recruitment, onboarding, and day-to-day management.</p>
-      </div>
-
-      <!-- Card 04: Employer of Record -->
-      <div class="em-card" data-index="04">
-        <div class="em-bracket em-bracket--tl"></div>
-        <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="45" cy="30" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.9"
-              fill="none" />
-            <ellipse cx="45" cy="42" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.75"
-              fill="none" />
-            <ellipse cx="45" cy="54" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.6"
-              fill="none" />
-            <ellipse cx="45" cy="66" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.4"
-              fill="none" />
-            <line x1="23" y1="30" x2="23" y2="66" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-            <line x1="67" y1="30" x2="67" y2="66" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-          </svg>
-        </div>
-        <span class="em-num">04</span>
-        <h3 class="em-card-title">Employer of Record</h3>
-        <p class="em-card-desc">We become the legal employer for your contingent workers — handling payroll, benefits,
-          and compliance. You focus on the work, not the paperwork, across any market.</p>
-      </div>
-
-      <!-- Card 05: Managed Workforce Programs -->
-      <div class="em-card" data-index="05">
-        <div class="em-bracket em-bracket--tl"></div>
-        <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="em-fp-group">
-              <path d="M45 72 C26 72 14 60 14 45 C14 30 26 18 45 18 C64 18 76 30 76 45" stroke="currentColor"
-                stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.9" />
-              <path d="M45 64 C31 64 22 55 22 45 C22 35 31 26 45 26 C59 26 68 35 68 45" stroke="currentColor"
-                stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8" />
-              <path d="M45 56 C36 56 30 51 30 45 C30 39 36 34 45 34 C54 34 60 39 60 45" stroke="currentColor"
-                stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.75" />
-              <path d="M45 48 C41 48 38 47 38 45 C38 43 41 42 45 42 C49 42 52 43 52 45" stroke="currentColor"
-                stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7" />
-              <line x1="45" y1="18" x2="45" y2="72" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4"
-                opacity="0.3" stroke-linecap="round">
-                <animate attributeName="y1" values="18;72;18" dur="2.8s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.8s" repeatCount="indefinite" />
-              </line>
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">05</span>
-        <h3 class="em-card-title">Managed Workforce Programs</h3>
-        <p class="em-card-desc">We take ownership of your entire contingent workforce program — vendor management,
-          reporting, and continuous optimization. One partner, complete accountability.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <style>
-    /* ══════════════════════════════════════════════════════
-   ENGAGEMENT MODELS SECTION
-══════════════════════════════════════════════════════ */
-    .em-section {
-      display: flex;
-      align-items: flex-start;
-      min-height: 100vh;
-      background: #f7f8fc;
-      border-top: 1px solid rgba(13, 17, 39, 0.08);
-      position: relative;
-      z-index: 2;
-      /* NO overflow:hidden — it kills position:sticky */
-    }
-
-    /* ── LEFT sticky panel ── */
-    .em-left {
-      position: sticky;
-      top: 0;
-      width: 50%;
-      flex-shrink: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #100220 0%, #7c3aed 55%, #a855f7 100%);
-      overflow: hidden;
-    }
-
-    /* Particle canvas fills left panel */
-    #emParticleCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .em-left-inner {
-      position: relative;
-      z-index: 1;
-      padding: 60px 8% 60px 8%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .em-pill {
-      display: inline-block;
-      width: fit-content;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 3px;
-      padding: 5px 13px;
-      background: rgba(255, 255, 255, 0.07);
-    }
-
-    .em-heading {
-      font-family: var(--font-head);
-      font-size: clamp(1.6rem, 2.6vw, 2.5rem);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.035em;
-      line-height: 1.13;
-    }
-
-    .em-desc {
-      font-size: clamp(0.82rem, 1vw, 0.92rem);
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.62);
-      line-height: 1.78;
-      max-width: 380px;
-    }
-
-    .em-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 26px;
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      border-radius: 6px;
-      border: 1.5px solid #ffffff;
-      background: transparent;
-      color: #ffffff;
-      text-decoration: none;
-      width: fit-content;
-      cursor: pointer;
-      transition: background 0.22s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s;
-    }
-
-    .em-cta svg {
-      width: 13px;
-      height: 13px;
-      flex-shrink: 0;
-    }
-
-    .em-cta:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    /* ── RIGHT scrollable area ── */
-    .em-right {
-      flex: 1;
-      width: 50%;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    /* ── Feature cards — divider style like reference ── */
-    .em-card {
-      position: relative;
-      padding: 48px 8% 44px 52px;
-      border-bottom: 1px solid rgba(13, 17, 39, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      background: #ffffff;
-      transition: background 0.3s ease;
-    }
-
-    .em-card:first-child {
-      border-top: 1px solid rgba(13, 17, 39, 0.1);
-    }
-
-    /* Per-card hover backgrounds + left accent border */
-    .em-card[data-index="01"]:hover {
-      background: rgba(124, 58, 237, 0.07);
-      border-left: 3px solid #7c3aed;
-    }
-
-    .em-card[data-index="02"]:hover {
-      background: rgba(124, 58, 237, 0.07);
-      border-left: 3px solid #7c3aed;
-    }
-
-    .em-card[data-index="03"]:hover {
-      background: rgba(124, 58, 237, 0.07);
-      border-left: 3px solid #7c3aed;
-    }
-
-    .em-card[data-index="04"]:hover {
-      background: rgba(124, 58, 237, 0.07);
-      border-left: 3px solid #7c3aed;
-    }
-
-    .em-card[data-index="05"]:hover {
-      background: rgba(124, 58, 237, 0.07);
-      border-left: 3px solid #7c3aed;
-    }
-
-    /* L-bracket corners — default subtle, coloured on hover */
-    .em-bracket {
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      transition: border-color 0.3s ease;
-    }
-
-    .em-bracket--tl {
-      top: 14px;
-      left: 14px;
-      border-top: 1.5px solid rgba(13, 17, 39, 0.15);
-      border-left: 1.5px solid rgba(13, 17, 39, 0.15);
-    }
-
-    .em-bracket--br {
-      bottom: 14px;
-      right: 14px;
-      border-bottom: 1.5px solid rgba(13, 17, 39, 0.15);
-      border-right: 1.5px solid rgba(13, 17, 39, 0.15);
-    }
-
-    /* Per-card bracket colours on hover */
-    .em-card[data-index="01"]:hover .em-bracket--tl,
-    .em-card[data-index="01"]:hover .em-bracket--br {
-      border-color: #7c3aed;
-    }
-
-    .em-card[data-index="02"]:hover .em-bracket--tl,
-    .em-card[data-index="02"]:hover .em-bracket--br {
-      border-color: #7c3aed;
-    }
-
-    .em-card[data-index="03"]:hover .em-bracket--tl,
-    .em-card[data-index="03"]:hover .em-bracket--br {
-      border-color: #7c3aed;
-    }
-
-    .em-card[data-index="04"]:hover .em-bracket--tl,
-    .em-card[data-index="04"]:hover .em-bracket--br {
-      border-color: #7c3aed;
-    }
-
-    .em-card[data-index="05"]:hover .em-bracket--tl,
-    .em-card[data-index="05"]:hover .em-bracket--br {
-      border-color: #7c3aed;
-    }
-
-    /* Icon wrap — contained, no overflow */
-    .em-icon-wrap {
-      width: 80px;
-      height: 80px;
-      flex-shrink: 0;
-      color: #0d1127;
-      overflow: hidden;
-    }
-
-    .em-icon {
-      width: 100%;
-      height: 100%;
-      display: block;
-      color: #0d1127;
-      overflow: hidden;
-    }
-
-    /* Globe CSS animation — safe, contained */
-    @keyframes emGlobeRotate {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Card number — brand palette, one colour per card */
-    .em-num {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      display: block;
-    }
-
-    .em-card[data-index="01"] .em-num {
-      color: #7c3aed;
-    }
-
-    .em-card[data-index="02"] .em-num {
-      color: #7c3aed;
-    }
-
-    .em-card[data-index="03"] .em-num {
-      color: #7c3aed;
-    }
-
-    .em-card[data-index="04"] .em-num {
-      color: #7c3aed;
-    }
-
-    .em-card[data-index="05"] .em-num {
-      color: #7c3aed;
-    }
-
-    /* Card title */
-    .em-card-title {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-      font-size: clamp(0.88rem, 1.1vw, 1rem);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #0d1127;
-      line-height: 1.3;
-      margin: 0;
-    }
-
-    /* Card description */
-    .em-card-desc {
-      font-size: clamp(0.82rem, 0.95vw, 0.9rem);
-      font-weight: 400;
-      color: #6b7280;
-      line-height: 1.75;
-      max-width: 440px;
-      margin: 0;
-    }
-
-    /* ── Equalizer bar animation ── */
-    .em-bar {
-      transform-origin: bottom center;
-      animation: emBarWave 1.8s ease-in-out infinite;
-    }
-
-    .em-bars-group rect:nth-child(1) {
-      animation-delay: 0s;
-      animation-duration: 1.6s;
-    }
-
-    .em-bars-group rect:nth-child(2) {
-      animation-delay: 0.18s;
-      animation-duration: 2.0s;
-    }
-
-    .em-bars-group rect:nth-child(3) {
-      animation-delay: 0.08s;
-      animation-duration: 1.4s;
-    }
-
-    .em-bars-group rect:nth-child(4) {
-      animation-delay: 0.35s;
-      animation-duration: 1.9s;
-    }
-
-    .em-bars-group rect:nth-child(5) {
-      animation-delay: 0.12s;
-      animation-duration: 1.5s;
-    }
-
-    .em-bars-group rect:nth-child(6) {
-      animation-delay: 0.28s;
-      animation-duration: 2.1s;
-    }
-
-    .em-bars-group rect:nth-child(7) {
-      animation-delay: 0.05s;
-      animation-duration: 1.7s;
-    }
-
-    @keyframes emBarWave {
-
-      0%,
-      100% {
-        transform: scaleY(1);
-      }
-
-      50% {
-        transform: scaleY(0.3);
-      }
-    }
-
-    /* ── Chevron pulse animation ── */
-    .em-chevron-group {
-      animation: emChevronPulse 2.2s ease-in-out infinite;
-    }
-
-    @keyframes emChevronPulse {
-
-      0%,
-      100% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-
-      50% {
-        transform: translateX(-5px);
-        opacity: 0.65;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .em-left {
-        width: 50%;
-      }
-
-      .em-left-inner {
-        padding: 48px 6% 48px 6%;
-      }
-
-      .em-right {
-        width: 50%;
-      }
-
-      .em-card {
-        padding: 40px 6% 36px 40px;
-      }
-    }
-
-    @media (max-width: 820px) {
-      .em-section {
-        flex-direction: column;
-      }
-
-      .em-left {
-        position: relative;
-        top: auto;
-        width: 100%;
-        height: auto;
-        min-height: 340px;
-      }
-
-      .em-left-inner {
-        padding: 56px 8%;
-      }
-
-      .em-right {
-        width: 100%;
-        padding: 0;
-        gap: 0;
-      }
-
-      .em-card {
-        padding: 36px 6% 32px 6%;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .em-left-inner {
-        padding: 48px 6%;
-      }
-
-      .em-heading {
-        font-size: clamp(1.4rem, 6vw, 1.9rem);
-      }
-
-      .em-card {
-        padding: 28px 5% 24px 5%;
-      }
-
-      .em-icon-wrap {
-        width: 64px;
-        height: 64px;
-      }
-    }
-  </style>
-
-  <script>
-    (function () {
-      /* Scroll entrance for cards */
-      gsap.from('.em-left-inner > *', {
-        opacity: 0, y: 24, duration: 0.85, ease: 'power3.out', stagger: 0.12,
-        scrollTrigger: { trigger: '#emSection', start: 'top 80%', once: true }
-      });
-
-      gsap.from('.em-card', {
-        opacity: 0, x: 36, duration: 0.75, ease: 'power3.out', stagger: 0.14,
-        scrollTrigger: { trigger: '.em-right', start: 'top 85%', once: true }
-      });
-
-      /* Icon micro-animations via GSAP for cards that need it */
-      /* Globe card - already has SVG animateTransform */
-      /* Helix card - subtle pulse */
-      document.querySelectorAll('.em-card').forEach((card, i) => {
-        const iconWrap = card.querySelector('.em-icon-wrap');
-        if (!iconWrap) return;
-        gsap.to(iconWrap, {
-          y: -4,
-          duration: 2.5 + i * 0.3,
-          ease: 'sine.inOut',
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.4
-        });
-      });
-    })();
-  </script>
 
   <!-- ══════════════════════════════════════════════════════════
      ECOSYSTEM / HUB-AND-SPOKE
@@ -6674,7 +6123,9 @@
         <p class="impact-sub">Not testimonials but operational proof:</p>
       </div>
       <div class="impact-track">
-        <div class="impact-progress-line"><div class="impact-progress-fill"></div></div>
+        <div class="impact-progress-line">
+          <div class="impact-progress-fill"></div>
+        </div>
         <ul class="impact-list">
           <li class="impact-item-wrap" data-dir="left">
             <span class="impact-num">01</span>
@@ -6789,7 +6240,8 @@
       font-size: 0.6rem;
       font-weight: 700;
       letter-spacing: 0.1em;
-      color: rgba(124, 58, 237, 0.0);  /* starts invisible — GSAP reveals */
+      color: rgba(124, 58, 237, 0.0);
+      /* starts invisible — GSAP reveals */
       will-change: opacity;
     }
 
@@ -6814,150 +6266,168 @@
     }
 
     @media (max-width: 900px) {
-      .impact-item { font-size: clamp(1.5rem, 5.5vw, 3rem); white-space: normal; }
-      .impact-progress-line { display: none; }
-      .impact-list { padding-left: 0; }
-      .impact-num { display: none; }
+      .impact-item {
+        font-size: clamp(1.5rem, 5.5vw, 3rem);
+        white-space: normal;
+      }
+
+      .impact-progress-line {
+        display: none;
+      }
+
+      .impact-list {
+        padding-left: 0;
+      }
+
+      .impact-num {
+        display: none;
+      }
     }
 
     @media (max-width: 640px) {
-      .impact-section { padding: 72px 24px 80px; }
-      .impact-item { font-size: clamp(1.2rem, 7vw, 2rem); white-space: normal; }
+      .impact-section {
+        padding: 72px 24px 80px;
+      }
+
+      .impact-item {
+        font-size: clamp(1.2rem, 7vw, 2rem);
+        white-space: normal;
+      }
     }
   </style>
 
   <script>
-  (function () {
-    gsap.registerPlugin(ScrollTrigger);
+    (function () {
+      gsap.registerPlugin(ScrollTrigger);
 
-    /* ─────────────────────────────────────────────────────────────
-       IMPACT SECTION — fully scrub-driven, fully reversible
-       Each element has its own ST so scroll-up reverses one-by-one
-    ───────────────────────────────────────────────────────────── */
+      /* ─────────────────────────────────────────────────────────────
+         IMPACT SECTION — fully scrub-driven, fully reversible
+         Each element has its own ST so scroll-up reverses one-by-one
+      ───────────────────────────────────────────────────────────── */
 
-    // Helper: build a scrub-linked fromTo
-    function scrubReveal(target, fromVars, toVars, start, end, scrubLag) {
-      gsap.fromTo(target, fromVars, {
-        ...toVars,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: '#impactSection',
-          start: 'top ' + start + '%',
-          end:   'top ' + end   + '%',
-          scrub: scrubLag || 1.8,
-        }
-      });
-    }
-
-    // ── Header: pill + sub ────────────────────────────────────────
-    scrubReveal('.impact-pill',
-      { opacity: 0, y: 28, scale: 0.94 },
-      { opacity: 1, y: 0,  scale: 1   },
-      90, 72, 1.4
-    );
-    scrubReveal('.impact-sub',
-      { opacity: 0, y: 22 },
-      { opacity: 1, y: 0  },
-      86, 68, 1.4
-    );
-
-    // ── Progress line fill — spans the full scroll range ─────────
-    scrubReveal('.impact-progress-fill',
-      { height: '0%'   },
-      { height: '100%' },
-      80, 10, 1.6
-    );
-
-    // ── Main items — staggered, alternating sides ─────────────────
-    const wraps = document.querySelectorAll('.impact-item-wrap');
-
-    wraps.forEach(function(wrap, i) {
-      var el   = wrap.querySelector('.impact-item');
-      var num  = wrap.querySelector('.impact-num');
-      var purp = el.querySelector('.impact-purple');
-      var dir  = wrap.dataset.dir === 'right' ? 1 : -1;
-
-      // Stagger window: each line gets a 26% scroll band,
-      // successive items start 14% later → clean one-by-one cascade
-      var startPct = 80 - i * 14;
-      var endPct   = startPct - 26;
-
-      // ── Main text slide ────────────────────────────────────────
-      gsap.fromTo(el,
-        {
-          x:       dir * 180,
-          opacity: 0,
-          skewX:   dir * 10,
-          scale:   0.88,
-        },
-        {
-          x:       0,
-          opacity: 1,
-          skewX:   0,
-          scale:   1,
-          ease:    'power3.inOut',
+      // Helper: build a scrub-linked fromTo
+      function scrubReveal(target, fromVars, toVars, start, end, scrubLag) {
+        gsap.fromTo(target, fromVars, {
+          ...toVars,
+          ease: 'power2.inOut',
           scrollTrigger: {
             trigger: '#impactSection',
-            start:   'top ' + startPct + '%',
-            end:     'top ' + endPct   + '%',
-            scrub:   2.2,
+            start: 'top ' + start + '%',
+            end: 'top ' + end + '%',
+            scrub: scrubLag || 1.8,
           }
-        }
+        });
+      }
+
+      // ── Header: pill + sub ────────────────────────────────────────
+      scrubReveal('.impact-pill',
+        { opacity: 0, y: 28, scale: 0.94 },
+        { opacity: 1, y: 0, scale: 1 },
+        90, 72, 1.4
+      );
+      scrubReveal('.impact-sub',
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0 },
+        86, 68, 1.4
       );
 
-      // ── Number counter fades in alongside text ─────────────────
-      if (num) {
-        gsap.fromTo(num,
-          { opacity: 0, x: dir * 30 },
-          {
-            opacity: 1, x: 0,
-            ease: 'power2.inOut',
-            scrollTrigger: {
-              trigger: '#impactSection',
-              start:   'top ' + (startPct - 4)  + '%',
-              end:     'top ' + (endPct   + 6)  + '%',
-              scrub:   2.2,
-            }
-          }
-        );
-        // Override the rgba color via direct style since GSAP fromTo on color works
-        gsap.fromTo(num,
-          { color: 'rgba(124,58,237,0)' },
-          {
-            color: 'rgba(124,58,237,0.45)',
-            ease: 'power2.inOut',
-            scrollTrigger: {
-              trigger: '#impactSection',
-              start:   'top ' + (startPct - 4)  + '%',
-              end:     'top ' + (endPct   + 6)  + '%',
-              scrub:   2.2,
-            }
-          }
-        );
-      }
+      // ── Progress line fill — spans the full scroll range ─────────
+      scrubReveal('.impact-progress-fill',
+        { height: '0%' },
+        { height: '100%' },
+        80, 10, 1.6
+      );
 
-      // ── Purple word: delayed color + scale bloom ───────────────
-      if (purp) {
-        // Start as dark ink, bloom to purple slightly after the line lands
-        var ps = startPct - 6;
-        var pe = endPct + 4;
-        gsap.fromTo(purp,
-          { color: '#3a4060', scale: 0.92, filter: 'blur(4px)' },
+      // ── Main items — staggered, alternating sides ─────────────────
+      const wraps = document.querySelectorAll('.impact-item-wrap');
+
+      wraps.forEach(function (wrap, i) {
+        var el = wrap.querySelector('.impact-item');
+        var num = wrap.querySelector('.impact-num');
+        var purp = el.querySelector('.impact-purple');
+        var dir = wrap.dataset.dir === 'right' ? 1 : -1;
+
+        // Stagger window: each line gets a 26% scroll band,
+        // successive items start 14% later → clean one-by-one cascade
+        var startPct = 80 - i * 14;
+        var endPct = startPct - 26;
+
+        // ── Main text slide ────────────────────────────────────────
+        gsap.fromTo(el,
           {
-            color: '#7c3aed', scale: 1, filter: 'blur(0px)',
-            ease: 'power2.inOut',
+            x: dir * 180,
+            opacity: 0,
+            skewX: dir * 10,
+            scale: 0.88,
+          },
+          {
+            x: 0,
+            opacity: 1,
+            skewX: 0,
+            scale: 1,
+            ease: 'power3.inOut',
             scrollTrigger: {
               trigger: '#impactSection',
-              start:   'top ' + ps + '%',
-              end:     'top ' + pe + '%',
-              scrub:   2.6,
+              start: 'top ' + startPct + '%',
+              end: 'top ' + endPct + '%',
+              scrub: 2.2,
             }
           }
         );
-      }
-    });
 
-  })();
+        // ── Number counter fades in alongside text ─────────────────
+        if (num) {
+          gsap.fromTo(num,
+            { opacity: 0, x: dir * 30 },
+            {
+              opacity: 1, x: 0,
+              ease: 'power2.inOut',
+              scrollTrigger: {
+                trigger: '#impactSection',
+                start: 'top ' + (startPct - 4) + '%',
+                end: 'top ' + (endPct + 6) + '%',
+                scrub: 2.2,
+              }
+            }
+          );
+          // Override the rgba color via direct style since GSAP fromTo on color works
+          gsap.fromTo(num,
+            { color: 'rgba(124,58,237,0)' },
+            {
+              color: 'rgba(124,58,237,0.45)',
+              ease: 'power2.inOut',
+              scrollTrigger: {
+                trigger: '#impactSection',
+                start: 'top ' + (startPct - 4) + '%',
+                end: 'top ' + (endPct + 6) + '%',
+                scrub: 2.2,
+              }
+            }
+          );
+        }
+
+        // ── Purple word: delayed color + scale bloom ───────────────
+        if (purp) {
+          // Start as dark ink, bloom to purple slightly after the line lands
+          var ps = startPct - 6;
+          var pe = endPct + 4;
+          gsap.fromTo(purp,
+            { color: '#3a4060', scale: 0.92, filter: 'blur(4px)' },
+            {
+              color: '#7c3aed', scale: 1, filter: 'blur(0px)',
+              ease: 'power2.inOut',
+              scrollTrigger: {
+                trigger: '#impactSection',
+                start: 'top ' + ps + '%',
+                end: 'top ' + pe + '%',
+                scrub: 2.6,
+              }
+            }
+          );
+        }
+      });
+
+    })();
   </script>
 
   <!-- ══════════════════════════════════════════════════════════
@@ -8146,13 +7616,6 @@
             class="fl-col-link">Healthcare Staffing</a></nav>
       </div>
       <div class="fl-col">
-        <p class="fl-col-head">Engagement Models</p>
-        <nav class="fl-col-links"><a href="#" class="fl-col-link">Contract &amp; Contract-to-Hire</a><a href="#"
-            class="fl-col-link">Direct Hire</a><a href="#" class="fl-col-link">Teams as a Service</a><a href="#"
-            class="fl-col-link">Employer of Record</a><a href="#" class="fl-col-link">Managed Workforce Programs</a>
-        </nav>
-      </div>
-      <div class="fl-col">
         <p class="fl-col-head">AI &amp; Technology</p>
         <nav class="fl-col-links"><a href="#" class="fl-col-link">Hoonr™ Platform</a><a href="#"
             class="fl-col-link">RecruitBot™</a><a href="#" class="fl-col-link">PayPrism® Analytics</a><a href="#"
@@ -8303,6 +7766,14 @@
       const origCards = Array.from(track.children);
       const cloneSet = () => origCards.forEach(c => track.appendChild(c.cloneNode(true)));
       cloneSet(); cloneSet(); cloneSet();
+
+      // Re-assign palette classes based on absolute card index so
+      // every even card = purple, every odd card = golden mustard
+      Array.from(track.children).forEach((card, i) => {
+        card.classList.remove('sc-pal-1', 'sc-pal-2', 'sc-pal-3', 'sc-pal-4', 'sc-pal-5');
+        card.classList.add(i % 2 === 0 ? 'sc-pal-1' : 'sc-pal-2');
+      });
+
       const GAP = 18;
       let setWidth = 0;
       function measureSet() { const card = track.querySelector('.sc-card'); setWidth = (card.offsetWidth + GAP) * origCards.length; }
@@ -9050,6 +8521,7 @@ void main(){
       // THREE.JS SETUP
       // ═══════════════════════════════════════════
       const cwCanvas = document.getElementById('cw-webgl');
+      const cwBgLocked = document.getElementById('cw-bg-locked');
       const cwRenderer = new THREE.WebGLRenderer({ canvas: cwCanvas, antialias: false, alpha: true });
       cwRenderer.setClearColor(0x000000, 0); // fully transparent — CSS gradient shows through
       cwRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -9134,6 +8606,11 @@ void main(){
 
         cwCanvas.style.visibility = visible ? 'visible' : 'hidden';
         cwCanvas.style.clipPath = 'inset(' + insetTop + 'px 0px ' + insetBottom + 'px 0px)';
+
+        if (cwBgLocked) {
+          cwBgLocked.style.visibility = visible ? 'visible' : 'hidden';
+          cwBgLocked.style.clipPath = 'inset(' + insetTop + 'px 0px ' + insetBottom + 'px 0px)';
+        }
 
         // Hide HUD when wrapper bottom is within HUD_H of viewport bottom,
         // so the progress bar never overlaps the section below.
@@ -9397,205 +8874,6 @@ void main(){
 
 
 
-
-  <script>
-    (function () {
-      const canvas = document.getElementById('emParticleCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-
-      // ── Config ──────────────────────────────────────────
-      const LAYERS = [
-        // { count, zDepth(0=back,1=front), baseSpeed, maxR, baseAlpha, color }
-        { count: 180, z: 0.10, speed: 0.04, maxR: 0.8, alpha: 0.20, color: '255,255,255' },  // far — tiny, dim
-        { count: 160, z: 0.28, speed: 0.10, maxR: 1.2, alpha: 0.35, color: '255,255,255' },  // mid-back
-        { count: 120, z: 0.50, speed: 0.20, maxR: 1.6, alpha: 0.55, color: '255,255,255' },  // mid
-        { count: 80, z: 0.72, speed: 0.36, maxR: 2.2, alpha: 0.75, color: '255,255,255' },  // mid-front
-        { count: 40, z: 0.90, speed: 0.55, maxR: 3.0, alpha: 0.92, color: '255,255,255' },  // near — large, bright
-      ];
-      const MAX_CONNECT_DIST = 100; // connection line distance
-      const FOV = 500;              // perspective field-of-view
-
-      let W, H;
-      let scrollVel = 0;   // GSAP-driven scroll velocity  (0–1)
-      let scrollBoost = 1;   // multiplier applied to speeds
-      let t = 0;
-
-      // ── Resize ───────────────────────────────────────────
-      function resize() {
-        const el = canvas.parentElement;
-        W = canvas.width = el.offsetWidth;
-        H = canvas.height = el.offsetHeight;
-      }
-
-      // ── Build stars ──────────────────────────────────────
-      let stars = [];
-      function buildStars() {
-        stars = [];
-        for (const L of LAYERS) {
-          for (let i = 0; i < L.count; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            stars.push({
-              // 3-D position in a virtual cube (-1..1 on each axis)
-              x3: (Math.random() - 0.5) * 2,
-              y3: (Math.random() - 0.5) * 2,
-              z3: L.z * 0.8 + Math.random() * 0.2 * L.z, // clustered near layer depth
-              // layer ref
-              layer: L,
-              // individual drift direction (polar)
-              driftAngle: angle,
-              driftSpeed: L.speed * (0.7 + Math.random() * 0.6),
-              // twinkle
-              twinkleOffset: Math.random() * Math.PI * 2,
-              twinkleFreq: Math.random() * 0.03 + 0.008,
-              // size
-              baseR: L.maxR * (0.4 + Math.random() * 0.6),
-            });
-          }
-        }
-        // Sort back-to-front so near stars draw over far ones
-        stars.sort((a, b) => a.layer.z - b.layer.z);
-      }
-
-      // ── Project 3D → 2D (perspective) ───────────────────
-      function project(s) {
-        // z3 in 0..1; closer to 1 = nearer camera
-        const depth = 1 - s.layer.z; // 0=near, 1=far for perspective calc
-        const scale = FOV / (FOV + depth * 400);
-        return {
-          sx: W * 0.5 + s.x3 * W * 0.52 * scale,
-          sy: H * 0.5 + s.y3 * H * 0.52 * scale,
-          scale,
-        };
-      }
-
-      // ── Draw ─────────────────────────────────────────────
-      function draw() {
-        requestAnimationFrame(draw);
-        t += 0.016;
-
-        // Decay scroll boost
-        scrollBoost += (1 - scrollBoost) * 0.06;
-
-        ctx.clearRect(0, 0, W, H);
-
-        // Background radial glow (white tint, depth-aware)
-        const grd = ctx.createRadialGradient(W * 0.42, H * 0.5, 0, W * 0.42, H * 0.5, W * 0.8);
-        grd.addColorStop(0, 'rgba(255,255,255,0.10)');
-        grd.addColorStop(0.45, 'rgba(255,255,255,0.04)');
-        grd.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = grd;
-        ctx.fillRect(0, 0, W, H);
-
-        // Projected positions cache (avoid double-computing)
-        const proj = stars.map(project);
-
-        // ── Connection lines (only between stars of adjacent/same layers) ──
-        for (let i = 0; i < stars.length; i++) {
-          const si = stars[i], pi = proj[i];
-          if (si.layer.z < 0.4) continue; // skip back-most layer for perf
-          for (let j = i + 1; j < stars.length; j++) {
-            const sj = stars[j], pj = proj[j];
-            if (Math.abs(si.layer.z - sj.layer.z) > 0.3) continue;
-            const dx = pi.sx - pj.sx, dy = pi.sy - pj.sy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MAX_CONNECT_DIST) {
-              // Depth-fade: far-layer lines are subtler
-              const depthAlpha = (si.layer.z + sj.layer.z) * 0.5;
-              const lineAlpha = (1 - dist / MAX_CONNECT_DIST) * 0.16 * depthAlpha;
-              ctx.beginPath();
-              ctx.moveTo(pi.sx, pi.sy);
-              ctx.lineTo(pj.sx, pj.sy);
-              ctx.strokeStyle = `rgba(255,255,255,${lineAlpha})`;
-              ctx.lineWidth = pi.scale * 0.6;
-              ctx.stroke();
-            }
-          }
-        }
-
-        // ── Stars ──
-        for (let i = 0; i < stars.length; i++) {
-          const s = stars[i];
-          const L = s.layer;
-          const p = proj[i];
-          const boost = scrollBoost;
-
-          // Move in 3D (drift in XY plane of the virtual space)
-          const speed = s.driftSpeed * boost;
-          s.x3 += Math.cos(s.driftAngle) * speed * 0.0008;
-          s.y3 += Math.sin(s.driftAngle) * speed * 0.0008;
-
-          // Scroll gives a parallax "zoom" feel — near layers surge forward
-          s.y3 -= L.z * 0.00015 * boost * scrollVel;
-
-          // Wrap edges in 3D space
-          if (s.x3 > 1.05) s.x3 = -1.05;
-          if (s.x3 < -1.05) s.x3 = 1.05;
-          if (s.y3 > 1.05) s.y3 = -1.05;
-          if (s.y3 < -1.05) s.y3 = 1.05;
-
-          // Twinkle
-          const twinkle = Math.sin(t * s.twinkleFreq * 60 + s.twinkleOffset);
-          const a = Math.max(0.05, Math.min(1, L.alpha + twinkle * 0.2));
-
-          const r = s.baseR * p.scale;
-
-          // Glow for foreground stars
-          if (L.z > 0.55) {
-            const glowR = r * (L.z > 0.75 ? 5 : 3.5);
-            const glowA = a * L.z * 0.4;
-            const glow = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, glowR);
-            glow.addColorStop(0, `rgba(${L.color},${glowA})`);
-            glow.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.beginPath();
-            ctx.arc(p.sx, p.sy, glowR, 0, Math.PI * 2);
-            ctx.fillStyle = glow;
-            ctx.fill();
-          }
-
-          // Star dot
-          ctx.beginPath();
-          ctx.arc(p.sx, p.sy, Math.max(0.3, r), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${L.color},${a})`;
-          ctx.fill();
-        }
-      }
-
-      // ── GSAP ScrollTrigger integration ───────────────────
-      function initScrollTrigger() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-        const proxy = { vel: 0 };
-        gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.create({
-          trigger: '#emSection',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate(self) {
-            // self.getVelocity() returns px/s — normalise to a 0-10 range
-            const raw = Math.abs(self.getVelocity()) / 800;
-            scrollVel = Math.min(raw, 10);
-            // Boost speed proportionally
-            scrollBoost = 1 + Math.min(raw * 1.8, 7);
-          },
-        });
-      }
-
-      // ── Boot ─────────────────────────────────────────────
-      resize();
-      buildStars();
-      window.addEventListener('resize', () => { resize(); buildStars(); });
-
-      // Wait for GSAP to be ready
-      if (document.readyState === 'complete') {
-        initScrollTrigger();
-      } else {
-        window.addEventListener('load', initScrollTrigger);
-      }
-
-      draw();
-    })();
-  </script>
 
 </body>
 
